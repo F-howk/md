@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Markdown Files</h1>
+            <label for="local-file-input" class="file-input-label">
+                <input type="file" id="local-file-input" accept=".md" multiple style="display: none;">
+                选择本地文件
+            </label>
+            <ul id="file-list"></ul>
+        </div>
+        <div class="main-area">
+            <div class="toolbar" id="content-toolbar">
+                <button id="download-docx-btn" class="download-btn">Download as .docx</button>
+            </div>
+            <div class="markdown-body" id="content">
+                Select a file to preview...
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
