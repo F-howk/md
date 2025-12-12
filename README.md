@@ -1,59 +1,87 @@
 # Markdown Previewer & DOCX Converter
 
-This is a simple Node.js application that provides a real-time Markdown preview and allows users to convert Markdown files to DOCX format with styling that matches the preview.
+A feature-rich Node.js application that provides real-time Markdown preview and converts Markdown files to customizable styled DOCX format.
 
-## Features
+## ✨ Features
 
-- **Real-time Preview:** View rendered Markdown as HTML.
-- **Syntax Highlighting:** Supports code block syntax highlighting.
-- **DOCX Conversion:** Convert Markdown files to styled Microsoft Word documents (.docx).
-- **Custom Styling:** The generated DOCX files are styled to match the web preview's theme (Github-like light theme).
-- **File Management:** Browse and preview Markdown files from the server or upload local files.
+- **Real-time Preview** - Instantly view rendered Markdown as HTML
+- **Syntax Highlighting** - Code block highlighting with GitHub Dark theme
+- **DOCX Export** - Convert Markdown to formatted Microsoft Word documents (.docx)
+- **Theme Customization** - Ribbon-style toolbar for DOCX export styling:
+  - 🎨 **Colors** - Headings, links, code, quotes, tables, and more
+  - 📏 **Sizes** - Font sizes, spacing, border widths
+  - ⚙️ **Options** - Link underlines, table header styles, alternating rows
+- **Local File Support** - Preview Markdown files from your computer
+- **Server File Browser** - Browse and preview Markdown files from server directory
+- **Persistent Settings** - Theme configurations saved to localStorage
 
-## Installation
+## 📦 Installation
 
-1.  Clone the repository:
-    ```bash
-    git clone <your-repo-url>
-    cd md
-    ```
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd md
+   ```
 
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Usage
+## 🚀 Usage
 
-1.  Start the server:
-    ```bash
-    node server.js
-    ```
+1. Start the server:
+   ```bash
+   node server.js
+   ```
 
-2.  Open your browser and navigate to `http://localhost:3004`.
+2. Open your browser and navigate to `http://localhost:3004`
 
-3.  **Preview Files:**
-    - Select a file from the list on the left (server files) or use "Select Local File" to preview a file from your computer.
+3. **Preview Files:**
+   - Select a file from the left sidebar (server files)
+   - Or click "Select Local File" to upload local Markdown files
 
-4.  **Download as DOCX:**
-    - Once a file is loaded, click the "Download as .docx" button in the top right corner to download the converted Word document.
+4. **Configure DOCX Styles:**
+   - Use the Ribbon toolbar at the top to adjust export styles
+   - Switch between "Colors", "Sizes", and "Options" tabs
+   - Click "Reset" to restore default settings
 
-## Project Structure
+5. **Export to DOCX:**
+   - Click the "Export DOCX" button to download the converted Word document
 
-- `server.js`: The Express.js server handling API requests, file serving, and DOCX conversion.
-- `public/`: Contains static assets (HTML, CSS, JS) for the frontend.
-  - `index.html`: Main application page.
-  - `style.css`: Application styles.
-  - `script.js`: Frontend logic for file handling and API interaction.
+## 📁 Project Structure
 
-## Dependencies
+```
+md/
+├── server.js          # Express server (API, file serving, DOCX conversion)
+├── package.json       # Project configuration and dependencies
+└── public/            # Frontend static assets
+    ├── index.html     # Main page
+    ├── style.css      # Stylesheets
+    └── script.js      # Frontend logic
+```
 
-- **express**: Web framework for Node.js.
-- **marked**: Markdown parser.
-- **highlight.js**: Syntax highlighting for code blocks.
-- **markdown-docx**: Library for converting Markdown to DOCX.
-- **multer**: Middleware for handling `multipart/form-data` (file uploads).
+## 🔧 API Endpoints
 
-## License
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/files` | GET | List server Markdown files |
+| `/api/files/:filename` | GET | Get file content |
+| `/api/docx-config` | GET | Get DOCX theme configuration options |
+| `/api/convert` | POST | Convert Markdown to DOCX |
+
+## 📚 Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| express | Node.js web framework |
+| marked | Markdown parser |
+| highlight.js | Code syntax highlighting |
+| markdown-docx | Markdown to DOCX conversion |
+| multer | File upload middleware |
+| jszip | DOCX post-processing (table styles) |
+| get-port | Auto-detect available port |
+
+## 📄 License
 
 MIT
