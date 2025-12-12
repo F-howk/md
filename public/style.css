@@ -1,151 +1,554 @@
-
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    background-color: #f0f2f5;
-    color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: 0;
+  color: #333;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
+}
+
+/* Word-style Ribbon Toolbar */
+.ribbon-toolbar {
+  background: #f3f3f3;
+  border-bottom: 1px solid #d4d4d4;
+  flex-shrink: 0;
+}
+
+.ribbon-toolbar.collapsed .ribbon-content {
+  display: none;
+}
+
+.ribbon-toolbar.collapsed .ribbon-tab {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.toggle-btn {
+  background: transparent;
+  color: #666;
+  border: none !important;
+  font-size: 10px;
+  padding: 4px 8px !important;
+  transition: transform 0.2s;
+}
+
+.toggle-btn:hover {
+  background: #e0e0e0 !important;
+  color: #333;
+}
+
+.ribbon-toolbar.collapsed .toggle-btn {
+  transform: rotate(180deg);
+}
+
+.ribbon-tabs {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to bottom, #fff 0%, #f0f0f0 100%);
+  border-bottom: 1px solid #d4d4d4;
+  padding: 0 10px;
+  gap: 2px;
+}
+
+.ribbon-tab {
+  background: transparent;
+  border: none;
+  padding: 5px 14px;
+  font-size: 11px;
+  color: #444;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.ribbon-tab:hover {
+  background: #e8e8e8;
+}
+
+.ribbon-tab.active {
+  background: #fff;
+  border-bottom: 2px solid #0078d4;
+  color: #0078d4;
+}
+
+.ribbon-spacer {
+  flex-grow: 1;
+}
+
+.ribbon-btn {
+  padding: 4px 12px;
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.15s;
+  margin: 3px 2px;
+}
+
+.ribbon-btn.reset-btn {
+  background: #fff;
+  color: #444;
+}
+
+.ribbon-btn.reset-btn:hover {
+  background: #e8e8e8;
+  border-color: #999;
+}
+
+.ribbon-btn.download-btn {
+  background: linear-gradient(to bottom, #28a745 0%, #218838 100%);
+  color: white;
+  border-color: #1e7e34;
+}
+
+.ribbon-btn.download-btn:hover {
+  background: linear-gradient(to bottom, #218838 0%, #1e7e34 100%);
+}
+
+.ribbon-content {
+  background: #f8f8f8;
+  padding: 6px 12px;
+  min-height: 45px;
+}
+
+.ribbon-panel {
+  display: none;
+}
+
+.ribbon-panel.active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.ribbon-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px 10px;
+  border-right: 1px solid #ddd;
+  min-width: 70px;
+}
+
+.ribbon-group:last-child {
+  border-right: none;
+}
+
+.ribbon-group-title {
+  font-size: 9px;
+  color: #666;
+  text-align: center;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.ribbon-group-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.ribbon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 3px;
+  cursor: default;
+}
+
+.ribbon-item:hover {
+  background: #e5e5e5;
+}
+
+.ribbon-item label {
+  font-size: 10px;
+  color: #555;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ribbon-item input[type="color"] {
+  width: 24px;
+  height: 18px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ribbon-item input[type="color"]:hover {
+  border-color: #0078d4;
+}
+
+.ribbon-item input[type="number"] {
+  width: 45px;
+  padding: 2px 4px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.ribbon-item input[type="number"]:focus {
+  outline: none;
+  border-color: #0078d4;
+}
+
+.ribbon-item .checkbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.ribbon-item .checkbox-wrapper span {
+  font-size: 9px;
+  color: #666;
+}
+
+.ribbon-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  margin: 0;
 }
 
 .sidebar {
-    width: 250px;
-    background-color: #fff;
-    border-right: 1px solid #ddd;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    overflow-y: auto;
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
 }
 
 .sidebar h1 {
-    font-size: 1.5em;
-    margin-top: 0;
-    color: #007bff;
-    margin-bottom: 20px;
+  font-size: 1.5em;
+  margin-top: 0;
+  color: #007bff;
+  margin-bottom: 20px;
 }
 
 .file-input-label {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
 .file-input-label:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 #file-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 #file-list li {
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
 }
 
 #file-list li:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 #file-list li.active {
-    background-color: #007bff;
-    color: white;
+  background-color: #007bff;
+  color: white;
 }
 
 .main-area {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: #fff;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* 自定义滚动条样式 */
+.content-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 5px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  width: 6px;
+  border-radius: 5px;
+}
+
+/* 侧边栏滚动条 */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 .toolbar {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 40px;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
-    flex-shrink: 0;
-    z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .markdown-body {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 40px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  min-height: 100%;
+  box-sizing: border-box;
 }
 
 .download-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
+  background-color: #28a745;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
 }
 
 .download-btn:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 /* Styles for Markdown content */
-.markdown-body h1, .markdown-body h2, .markdown-body h3 {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.3em;
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
 }
 .markdown-body code {
-    background-color: #eee;
-    padding: .2em .4em;
-    margin: 0;
-    font-size: 85%;
-    border-radius: 3px;
+  background-color: #eee;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  border-radius: 3px;
 }
 .markdown-body pre {
-    background: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 1em;
-    border-radius: 4px;
-    overflow-x: auto;
-    white-space: pre;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre;
 }
 .markdown-body pre code {
-    background: none;
-    padding: 0;
+  background: none;
+  padding: 0;
 }
 .markdown-body blockquote {
-    border-left: 4px solid #ddd;
-    padding: 0 1em;
-    color: #666;
+  border-left: 4px solid #ddd;
+  padding: 0 1em;
+  color: #666;
 }
 .markdown-body table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
-.markdown-body th, .markdown-body td {
-    border: 1px solid #ddd;
-    padding: 8px;
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 .markdown-body th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
+}
+
+.style-toolbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.style-toolbar-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.style-toolbar-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+
+.config-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 6px 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  align-items: center;
+}
+
+.config-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: #5a9bd5;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.config-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 0;
+}
+
+.config-item label {
+  font-size: 11px;
+  color: #555;
+  white-space: nowrap;
+}
+
+.config-item input[type="color"] {
+  width: 24px;
+  height: 18px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.config-item input[type="color"]:hover {
+  border-color: #007bff;
+}
+
+.config-item input[type="number"] {
+  width: 48px;
+  padding: 2px 4px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+.config-item input[type="number"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.config-item .checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.config-item .checkbox-wrapper span {
+  font-size: 10px;
+  color: #666;
+}
+
+.config-item input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.reset-btn {
+  padding: 4px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+  background-color: #5a6268;
+}
+
+/* 可折叠工具栏 */
+.style-toolbar.collapsed .style-toolbar-content {
+  display: none;
+}
+
+.style-toolbar-toggle {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  color: #555;
+  padding: 2px 8px;
+  margin-right: 10px;
+  transition: all 0.2s;
+}
+
+.style-toolbar-toggle:hover {
+  background: #e9ecef;
+  border-color: #999;
+  color: #333;
 }

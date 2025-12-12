@@ -20,3 +20,11 @@ console.log("Hello, World!");
 ### List
 * Item 1
 * Item 2
+
+#### 枚举值
+
+|属性|值|
+|---|---|
+|status|available|
+|status|pending|
+|status|sold|
