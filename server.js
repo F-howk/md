@@ -24,39 +24,140 @@ const DOCX_THEME_CONFIG = {
     codespan: { label: "行内代码颜色", default: "70AD47", type: "color" },
     codeBackground: { label: "代码背景颜色", default: "F6F6F7", type: "color" },
     blockquote: { label: "引用文本颜色", default: "666666", type: "color" },
-    blockquoteBackground: { label: "引用背景颜色", default: "F9F9F9", type: "color" },
+    blockquoteBackground: {
+      label: "引用背景颜色",
+      default: "F9F9F9",
+      type: "color",
+    },
     del: { label: "删除线颜色", default: "FF0000", type: "color" },
     tag: { label: "HTML标签颜色", default: "ED7D31", type: "color" },
     html: { label: "HTML内容颜色", default: "4472C4", type: "color" },
-    tableHeaderBackground: { label: "表头背景颜色", default: "F2F2F2", type: "color" },
-    tableHeaderTextColor: { label: "表头文字颜色", default: "000000", type: "color" },
-    tableBodyBackground: { label: "表格内容背景", default: "FFFFFF", type: "color" },
-    tableAltRowBackground: { label: "交替行背景色", default: "F9F9F9", type: "color" },
+    tableHeaderBackground: {
+      label: "表头背景颜色",
+      default: "F2F2F2",
+      type: "color",
+    },
+    tableHeaderTextColor: {
+      label: "表头文字颜色",
+      default: "000000",
+      type: "color",
+    },
+    tableBodyBackground: {
+      label: "表格内容背景",
+      default: "FFFFFF",
+      type: "color",
+    },
+    tableAltRowBackground: {
+      label: "交替行背景色",
+      default: "F9F9F9",
+      type: "color",
+    },
     border: { label: "边框颜色", default: "A5A5A5", type: "color" },
     hr: { label: "分隔线颜色", default: "D9D9D9", type: "color" },
   },
   // 尺寸配置 (半点单位，如 36 = 18pt)
   sizes: {
-    heading1Size: { label: "标题1字号", default: 36, type: "number", min: 12, max: 144 },
-    heading2Size: { label: "标题2字号", default: 32, type: "number", min: 12, max: 120 },
-    heading3Size: { label: "标题3字号", default: 28, type: "number", min: 12, max: 96 },
-    heading4Size: { label: "标题4字号", default: 26, type: "number", min: 12, max: 72 },
-    heading5Size: { label: "标题5字号", default: 24, type: "number", min: 12, max: 60 },
-    heading6Size: { label: "标题6字号", default: 24, type: "number", min: 12, max: 48 },
-    spaceSize: { label: "段落间距", default: 12, type: "number", min: 6, max: 48 },
-    codeSize: { label: "代码字号", default: 22, type: "number", min: 8, max: 48 },
-    tableSize: { label: "表格字号", default: 21, type: "number", min: 14, max: 36 },
-    tableBorderWidth: { label: "表格边框宽度", default: 4, type: "number", min: 1, max: 24 },
-    tableCellPadding: { label: "单元格内边距", default: 80, type: "number", min: 20, max: 300 },
+    heading1Size: {
+      label: "标题1字号",
+      default: 36,
+      type: "number",
+      min: 12,
+      max: 144,
+    },
+    heading2Size: {
+      label: "标题2字号",
+      default: 32,
+      type: "number",
+      min: 12,
+      max: 120,
+    },
+    heading3Size: {
+      label: "标题3字号",
+      default: 28,
+      type: "number",
+      min: 12,
+      max: 96,
+    },
+    heading4Size: {
+      label: "标题4字号",
+      default: 26,
+      type: "number",
+      min: 12,
+      max: 72,
+    },
+    heading5Size: {
+      label: "标题5字号",
+      default: 24,
+      type: "number",
+      min: 12,
+      max: 60,
+    },
+    heading6Size: {
+      label: "标题6字号",
+      default: 24,
+      type: "number",
+      min: 12,
+      max: 48,
+    },
+    spaceSize: {
+      label: "段落间距",
+      default: 12,
+      type: "number",
+      min: 6,
+      max: 48,
+    },
+    codeSize: {
+      label: "代码字号",
+      default: 22,
+      type: "number",
+      min: 8,
+      max: 48,
+    },
+    tableSize: {
+      label: "表格字号",
+      default: 21,
+      type: "number",
+      min: 14,
+      max: 36,
+    },
+    tableBorderWidth: {
+      label: "表格边框宽度",
+      default: 4,
+      type: "number",
+      min: 1,
+      max: 24,
+    },
+    tableCellPadding: {
+      label: "单元格内边距",
+      default: 80,
+      type: "number",
+      min: 20,
+      max: 300,
+    },
   },
   // 其他配置
   options: {
     linkUnderline: { label: "链接下划线", default: true, type: "boolean" },
     tableHeaderBold: { label: "表头文字加粗", default: true, type: "boolean" },
-    tableHeaderCenter: { label: "表头文字居中", default: true, type: "boolean" },
-    tableAltRowEnabled: { label: "启用交替行颜色", default: false, type: "boolean" },
+    tableHeaderCenter: {
+      label: "表头文字居中",
+      default: true,
+      type: "boolean",
+    },
+    tableAltRowEnabled: {
+      label: "启用交替行颜色",
+      default: false,
+      type: "boolean",
+    },
     tableCenterAlign: { label: "表格居中", default: true, type: "boolean" },
-  }
+  },
+  // 字体配置
+  fonts: {
+    eastAsia: { label: "中文字体", default: "Microsoft YaHei", type: "string" },
+    ascii: { label: "西文字体", default: "Arial", type: "string" },
+    hAnsi: { label: "西文HAnsi字体", default: "Arial", type: "string" },
+    symbol: { label: "符号字体", default: "Segoe UI Emoji", type: "string" },
+  },
 };
 
 // 生成默认主题配置
@@ -74,14 +175,16 @@ function getDefaultTheme() {
 function validateTheme(inputTheme) {
   const validTheme = {};
   const defaultTheme = getDefaultTheme();
-  
+
   for (const category of Object.values(DOCX_THEME_CONFIG)) {
     for (const [key, config] of Object.entries(category)) {
       if (inputTheme && inputTheme[key] !== undefined) {
         // 根据类型验证和转换值
         if (config.type === "color") {
           // 颜色值：确保是有效的6位十六进制
-          let colorVal = String(inputTheme[key]).replace(/^#/, "").toUpperCase();
+          let colorVal = String(inputTheme[key])
+            .replace(/^#/, "")
+            .toUpperCase();
           if (/^[0-9A-F]{6}$/.test(colorVal)) {
             validTheme[key] = colorVal;
           } else {
@@ -106,7 +209,7 @@ function validateTheme(inputTheme) {
       }
     }
   }
-  
+
   return validTheme;
 }
 // ======= DOCX 主题配置定义结束 =======
@@ -130,15 +233,15 @@ async function applyTableStyles(docxBuffer, themeOptions) {
   const tableHeaderCenter = themeOptions.tableHeaderCenter !== false;
   const tableAltRowEnabled = themeOptions.tableAltRowEnabled === true;
   const tableCenterAlign = themeOptions.tableCenterAlign !== false;
-  
+
   try {
     // 加载 DOCX (实际上是 ZIP 文件)
     const zip = await JSZip.loadAsync(docxBuffer);
-    
+
     // 读取 document.xml
     const documentXmlPath = "word/document.xml";
     let documentXml = await zip.file(documentXmlPath).async("string");
-    
+
     // 辅助函数：为表格生成边框 XML
     const generateBordersXml = () => `<w:tblBorders>
       <w:top w:val="single" w:sz="${borderWidth}" w:space="0" w:color="${borderColor}"/>
@@ -148,7 +251,7 @@ async function applyTableStyles(docxBuffer, themeOptions) {
       <w:insideH w:val="single" w:sz="${borderWidth}" w:space="0" w:color="${borderColor}"/>
       <w:insideV w:val="single" w:sz="${borderWidth}" w:space="0" w:color="${borderColor}"/>
     </w:tblBorders>`;
-    
+
     // 辅助函数：生成单元格边距 XML
     const generateCellMarginXml = () => `<w:tblCellMar>
       <w:top w:w="${cellPadding}" w:type="dxa"/>
@@ -156,69 +259,80 @@ async function applyTableStyles(docxBuffer, themeOptions) {
       <w:bottom w:w="${cellPadding}" w:type="dxa"/>
       <w:right w:w="${cellPadding}" w:type="dxa"/>
     </w:tblCellMar>`;
-    
+
     // 1. 替换现有表格边框或添加边框
     documentXml = documentXml.replace(
       /<w:tblBorders>[\s\S]*?<\/w:tblBorders>/g,
       generateBordersXml()
     );
-    
+
     // 2. 处理 tblPr：添加边框、单元格边距、居中对齐
     documentXml = documentXml.replace(
       /<w:tblPr>([\s\S]*?)<\/w:tblPr>/g,
       (match, content) => {
         let newContent = content;
-        
+
         // 移除现有的 tblBorders 和 tblCellMar
-        newContent = newContent.replace(/<w:tblBorders>[\s\S]*?<\/w:tblBorders>/g, '');
-        newContent = newContent.replace(/<w:tblCellMar>[\s\S]*?<\/w:tblCellMar>/g, '');
-        newContent = newContent.replace(/<w:jc[^>]*\/>/g, '');
-        
+        newContent = newContent.replace(
+          /<w:tblBorders>[\s\S]*?<\/w:tblBorders>/g,
+          ""
+        );
+        newContent = newContent.replace(
+          /<w:tblCellMar>[\s\S]*?<\/w:tblCellMar>/g,
+          ""
+        );
+        newContent = newContent.replace(/<w:jc[^>]*\/>/g, "");
+
         // 添加边框
         newContent += generateBordersXml();
-        
+
         // 添加单元格边距
         newContent += generateCellMarginXml();
-        
+
         // 添加表格居中
         if (tableCenterAlign) {
           newContent += '<w:jc w:val="center"/>';
         }
-        
+
         return `<w:tblPr>${newContent}</w:tblPr>`;
       }
     );
-    
+
     // 3. 处理所有表格，识别行并应用样式
     documentXml = documentXml.replace(
       /<w:tbl>([\s\S]*?)<\/w:tbl>/g,
       (tableMatch, tableContent) => {
         let rowIndex = 0;
-        
+
         // 处理每一行
         const updatedTableContent = tableContent.replace(
           /<w:tr([^>]*)>([\s\S]*?)<\/w:tr>/g,
           (rowMatch, rowAttrs, rowContent) => {
-            const isHeaderRow = rowContent.includes('<w:tblHeader') || rowIndex === 0;
-            const isAltRow = !isHeaderRow && tableAltRowEnabled && (rowIndex % 2 === 0);
+            const isHeaderRow =
+              rowContent.includes("<w:tblHeader") || rowIndex === 0;
+            const isAltRow =
+              !isHeaderRow && tableAltRowEnabled && rowIndex % 2 === 0;
             rowIndex++;
-            
+
             // 处理行中的每个单元格
             const updatedRowContent = rowContent.replace(
               /<w:tc>([\s\S]*?)<\/w:tc>/g,
               (cellMatch, cellContent) => {
                 // 处理 tcPr
                 let updatedCellContent;
-                
-                if (cellContent.includes('<w:tcPr>')) {
+
+                if (cellContent.includes("<w:tcPr>")) {
                   updatedCellContent = cellContent.replace(
                     /<w:tcPr>([\s\S]*?)<\/w:tcPr>/,
                     (tcPrMatch, tcPrContent) => {
                       let newTcPrContent = tcPrContent;
-                      
+
                       // 移除现有的 shading
-                      newTcPrContent = newTcPrContent.replace(/<w:shd[^>]*\/>/g, '');
-                      
+                      newTcPrContent = newTcPrContent.replace(
+                        /<w:shd[^>]*\/>/g,
+                        ""
+                      );
+
                       // 添加背景色
                       if (isHeaderRow) {
                         newTcPrContent += `<w:shd w:val="clear" w:color="auto" w:fill="${tableHeaderBg}"/>`;
@@ -227,13 +341,13 @@ async function applyTableStyles(docxBuffer, themeOptions) {
                       } else if (tableBodyBg !== "FFFFFF") {
                         newTcPrContent += `<w:shd w:val="clear" w:color="auto" w:fill="${tableBodyBg}"/>`;
                       }
-                      
+
                       return `<w:tcPr>${newTcPrContent}</w:tcPr>`;
                     }
                   );
                 } else {
                   // 如果没有 tcPr，创建一个
-                  let tcPrContent = '';
+                  let tcPrContent = "";
                   if (isHeaderRow) {
                     tcPrContent = `<w:shd w:val="clear" w:color="auto" w:fill="${tableHeaderBg}"/>`;
                   } else if (isAltRow) {
@@ -242,67 +356,86 @@ async function applyTableStyles(docxBuffer, themeOptions) {
                     tcPrContent = `<w:shd w:val="clear" w:color="auto" w:fill="${tableBodyBg}"/>`;
                   }
                   if (tcPrContent) {
-                    updatedCellContent = `<w:tcPr>${tcPrContent}</w:tcPr>` + cellContent;
+                    updatedCellContent =
+                      `<w:tcPr>${tcPrContent}</w:tcPr>` + cellContent;
                   } else {
                     updatedCellContent = cellContent;
                   }
                 }
-                
+
                 // 处理单元格中的段落文字样式
                 if (isHeaderRow) {
                   updatedCellContent = updatedCellContent.replace(
                     /<w:p([^>]*)>([\s\S]*?)<\/w:p>/g,
                     (pMatch, pAttrs, pContent) => {
                       // 处理段落属性 - 添加居中对齐
-                      let pPrContent = '';
-                      const pPrMatch = pContent.match(/<w:pPr>([\s\S]*?)<\/w:pPr>/);
+                      let pPrContent = "";
+                      const pPrMatch = pContent.match(
+                        /<w:pPr>([\s\S]*?)<\/w:pPr>/
+                      );
                       if (pPrMatch) {
                         pPrContent = pPrMatch[1];
-                        pContent = pContent.replace(/<w:pPr>[\s\S]*?<\/w:pPr>/, '');
+                        pContent = pContent.replace(
+                          /<w:pPr>[\s\S]*?<\/w:pPr>/,
+                          ""
+                        );
                       }
-                      
+
                       // 移除现有的对齐设置
-                      pPrContent = pPrContent.replace(/<w:jc[^>]*\/>/g, '');
-                      
+                      pPrContent = pPrContent.replace(/<w:jc[^>]*\/>/g, "");
+
                       // 添加居中对齐
                       if (tableHeaderCenter) {
                         pPrContent += '<w:jc w:val="center"/>';
                       }
-                      
+
                       // 处理 run 属性
                       let updatedPContent = pContent.replace(
                         /<w:r>([\s\S]*?)<\/w:r>/g,
                         (rMatch, rContent) => {
-                          let rPrContent = '';
-                          
+                          let rPrContent = "";
+
                           // 提取现有的 rPr 内容
-                          const rPrMatch = rContent.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
+                          const rPrMatch = rContent.match(
+                            /<w:rPr>([\s\S]*?)<\/w:rPr>/
+                          );
                           if (rPrMatch) {
                             rPrContent = rPrMatch[1];
-                            rContent = rContent.replace(/<w:rPr>[\s\S]*?<\/w:rPr>/, '');
+                            rContent = rContent.replace(
+                              /<w:rPr>[\s\S]*?<\/w:rPr>/,
+                              ""
+                            );
                           }
-                          
+
                           // 移除现有的颜色、字号、加粗设置
-                          rPrContent = rPrContent.replace(/<w:color[^>]*\/>/g, '');
-                          rPrContent = rPrContent.replace(/<w:sz[^>]*\/>/g, '');
-                          rPrContent = rPrContent.replace(/<w:szCs[^>]*\/>/g, '');
-                          rPrContent = rPrContent.replace(/<w:b[^>]*\/>/g, '');
-                          
+                          rPrContent = rPrContent.replace(
+                            /<w:color[^>]*\/>/g,
+                            ""
+                          );
+                          rPrContent = rPrContent.replace(/<w:sz[^>]*\/>/g, "");
+                          rPrContent = rPrContent.replace(
+                            /<w:szCs[^>]*\/>/g,
+                            ""
+                          );
+                          rPrContent = rPrContent.replace(/<w:b[^>]*\/>/g, "");
+
                           // 添加表头文字颜色
                           rPrContent += `<w:color w:val="${tableHeaderTextColor}"/>`;
                           // 添加字号
                           rPrContent += `<w:sz w:val="${tableSize}"/><w:szCs w:val="${tableSize}"/>`;
                           // 添加加粗
                           if (tableHeaderBold) {
-                            rPrContent += '<w:b/><w:bCs/>';
+                            rPrContent += "<w:b/><w:bCs/>";
                           }
-                          
+
                           return `<w:r><w:rPr>${rPrContent}</w:rPr>${rContent}</w:r>`;
                         }
                       );
-                      
+
                       // 构建最终段落
-                      const finalPPr = pPrContent ? `<w:pPr>${pPrContent}</w:pPr>` : '';
+                      const finalPPr = pPrContent
+                        ? `<w:pPr>${pPrContent}</w:pPr>`
+                        : "";
                       return `<w:p${pAttrs}>${finalPPr}${updatedPContent}</w:p>`;
                     }
                   );
@@ -311,48 +444,53 @@ async function applyTableStyles(docxBuffer, themeOptions) {
                   updatedCellContent = updatedCellContent.replace(
                     /<w:r>([\s\S]*?)<\/w:r>/g,
                     (rMatch, rContent) => {
-                      let rPrContent = '';
-                      
-                      const rPrMatch = rContent.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
+                      let rPrContent = "";
+
+                      const rPrMatch = rContent.match(
+                        /<w:rPr>([\s\S]*?)<\/w:rPr>/
+                      );
                       if (rPrMatch) {
                         rPrContent = rPrMatch[1];
-                        rContent = rContent.replace(/<w:rPr>[\s\S]*?<\/w:rPr>/, '');
+                        rContent = rContent.replace(
+                          /<w:rPr>[\s\S]*?<\/w:rPr>/,
+                          ""
+                        );
                       }
-                      
+
                       // 移除现有字号设置
-                      rPrContent = rPrContent.replace(/<w:sz[^>]*\/>/g, '');
-                      rPrContent = rPrContent.replace(/<w:szCs[^>]*\/>/g, '');
-                      
+                      rPrContent = rPrContent.replace(/<w:sz[^>]*\/>/g, "");
+                      rPrContent = rPrContent.replace(/<w:szCs[^>]*\/>/g, "");
+
                       // 添加字号
                       rPrContent += `<w:sz w:val="${tableSize}"/><w:szCs w:val="${tableSize}"/>`;
-                      
+
                       return `<w:r><w:rPr>${rPrContent}</w:rPr>${rContent}</w:r>`;
                     }
                   );
                 }
-                
+
                 return `<w:tc>${updatedCellContent}</w:tc>`;
               }
             );
-            
+
             return `<w:tr${rowAttrs}>${updatedRowContent}</w:tr>`;
           }
         );
-        
+
         return `<w:tbl>${updatedTableContent}</w:tbl>`;
       }
     );
-    
+
     // 更新 ZIP 中的 document.xml
     zip.file(documentXmlPath, documentXml);
-    
+
     // 重新生成 DOCX buffer
     const newBuffer = await zip.generateAsync({
       type: "nodebuffer",
       compression: "DEFLATE",
-      compressionOptions: { level: 9 }
+      compressionOptions: { level: 9 },
     });
-    
+
     return newBuffer;
   } catch (err) {
     console.error("Error applying table styles:", err);
@@ -360,7 +498,134 @@ async function applyTableStyles(docxBuffer, themeOptions) {
     return docxBuffer;
   }
 }
-// ======= 表格样式后处理函数结束 =======
+
+/**
+ * 修改全局字体，并强制 Emoji 字体显示
+ */
+async function applyGlobalFont(docxBuffer, themeOptions) {
+  try {
+    const zip = await JSZip.loadAsync(docxBuffer);
+    const stylesXmlPath = "word/styles.xml";
+    if (!zip.file(stylesXmlPath)) return docxBuffer;
+
+    let stylesXml = await zip.file(stylesXmlPath).async("string");
+
+    // 从 themeOptions 获取字体配置
+    const eastAsiaFont = themeOptions.eastAsia || "Microsoft YaHei";
+    const asciiFont = themeOptions.ascii || "Arial";
+    const hAnsiFont = themeOptions.hAnsi || "Arial";
+    const symbolFont = themeOptions.symbol || "Segoe UI Emoji";
+
+    // 全局默认字体 XML
+    // w:cs 设置为 symbolFont (作为备选)，且 w:hint 指示优先使用东亚字体
+    const fontXml = `<w:rFonts w:ascii="${asciiFont}" w:eastAsia="${eastAsiaFont}" w:hAnsi="${hAnsiFont}" w:cs="${symbolFont}" w:hint="eastAsia"/>`;
+
+    // 1. 修改 w:docDefaults (全局默认样式)
+    if (stylesXml.includes("<w:rPrDefault>")) {
+      const rPrDefaultRegex = /<w:rPrDefault>([\s\S]*?)<\/w:rPrDefault>/;
+      stylesXml = stylesXml.replace(rPrDefaultRegex, (match, content) => {
+        if (content.includes("<w:rPr>")) {
+          return match.replace(
+            /<w:rPr>([\s\S]*?)<\/w:rPr>/,
+            (rPrMatch, rPrContent) => {
+              let newRPrContent = rPrContent.replace(/<w:rFonts[^>]*\/>/g, "");
+              return `<w:rPr>${fontXml}${newRPrContent}</w:rPr>`;
+            }
+          );
+        } else {
+          return `<w:rPrDefault><w:rPr>${fontXml}</w:rPr>${content}</w:rPrDefault>`;
+        }
+      });
+    }
+
+    // 2. 修改 Normal 样式 (如果存在)
+    const normalStyleRegex =
+      /<w:style[^>]*?w:styleId="Normal"[^>]*?>([\s\S]*?)<\/w:style>/g;
+    if (normalStyleRegex.test(stylesXml)) {
+      stylesXml = stylesXml.replace(normalStyleRegex, (match, content) => {
+        if (match.includes("<w:rPr>")) {
+          return match.replace(
+            /<w:rPr>([\s\S]*?)<\/w:rPr>/,
+            (rPrMatch, rPrContent) => {
+              let newRPrContent = rPrContent.replace(/<w:rFonts[^>]*\/>/g, "");
+              return `<w:rPr>${fontXml}${newRPrContent}</w:rPr>`;
+            }
+          );
+        } else {
+          if (match.includes("</w:name>")) {
+            return match.replace(
+              "</w:name>",
+              `</w:name><w:rPr>${fontXml}</w:rPr>`
+            );
+          }
+          return match;
+        }
+      });
+    }
+
+    zip.file(stylesXmlPath, stylesXml);
+
+    // 3. 后处理 document.xml：强制 Emoji 字体
+    const documentXmlPath = "word/document.xml";
+    let documentXml = await zip.file(documentXmlPath).async("string");
+
+    // Emoji 专用字体设置：强制指定所有字体类型为 symbolFont
+    const emojiFontXml = `<w:rFonts w:ascii="${symbolFont}" w:eastAsia="${symbolFont}" w:hAnsi="${symbolFont}" w:cs="${symbolFont}" w:hint="default"/>`;
+
+    // 匹配所有 <w:r> 元素
+    documentXml = documentXml.replace(
+      /<w:r>([\s\S]*?)<\/w:r>/gu,
+      (runMatch, runContent) => {
+        // 使用 Unicode property escapes 检查 Run 是否包含 Emoji
+        if (/\p{Emoji}/u.test(runContent)) {
+          let hasEmojiInText = false;
+          // 进一步检查 <w:t> 内容
+          runContent.replace(
+            /<w:t[^>]*>([\s\S]*?)<\/w:t>/gu,
+            (textMatch, textContent) => {
+              if (/\p{Emoji}/u.test(textContent)) {
+                hasEmojiInText = true;
+              }
+              return textMatch;
+            }
+          );
+
+          if (hasEmojiInText) {
+            if (runContent.includes("<w:rPr>")) {
+              return runMatch.replace(
+                /<w:rPr>([\s\S]*?)<\/w:rPr>/,
+                (rPrMatch, rPrContent) => {
+                  let newRPrContent = rPrContent.replace(
+                    /<w:rFonts[^>]*\/>/g,
+                    ""
+                  );
+                  return `<w:rPr>${emojiFontXml}${newRPrContent}</w:rPr>`;
+                }
+              );
+            } else {
+              // 在 <w:t> 或其他子元素前插入 <w:rPr>
+              // 简单起见，插入在 <w:r> 标签之后的内容开头
+              return `<w:r><w:rPr>${emojiFontXml}</w:rPr>${runContent}</w:r>`;
+            }
+          }
+        }
+        return runMatch;
+      }
+    );
+
+    zip.file(documentXmlPath, documentXml);
+
+    return await zip.generateAsync({
+      type: "nodebuffer",
+      compression: "DEFLATE",
+      compressionOptions: { level: 9 },
+    });
+  } catch (err) {
+    console.error("Error applying global font:", err);
+    return docxBuffer;
+  }
+}
+// ======= 辅助函数结束 =======
 
 // Define the highlight function with JSON pretty-printing
 const highlightFn = function (code, lang) {
@@ -402,7 +667,7 @@ app.use(express.static("public"));
 app.get("/api/docx-config", (req, res) => {
   res.json({
     config: DOCX_THEME_CONFIG,
-    defaults: getDefaultTheme()
+    defaults: getDefaultTheme(),
   });
 });
 
@@ -419,57 +684,64 @@ app.get("/api/files", (req, res) => {
 });
 
 // --- Refactored DOCX conversion endpoint using markdown-docx ---
-app.post("/api/convert/docx/:filename", upload.single("mdfile"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).send("No file uploaded.");
-    }
-
-    let markdown = req.file.buffer.toString("utf8");
-    let filename = req.params.filename;
-
-    if (!markdown) {
-      return res.status(400).send("Markdown content is empty.");
-    }
-
-    // 使用验证后的主题配置
-    let themeOptions = getDefaultTheme();
-
-    if (req.body.theme) {
-      try {
-        const customTheme = JSON.parse(req.body.theme);
-        // 验证并只应用允许的配置选项
-        themeOptions = validateTheme(customTheme);
-      } catch (e) {
-        console.error("Error parsing custom theme:", e);
+app.post(
+  "/api/convert/docx/:filename",
+  upload.single("mdfile"),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).send("No file uploaded.");
       }
+
+      let markdown = req.file.buffer.toString("utf8");
+      let filename = req.params.filename;
+
+      if (!markdown) {
+        return res.status(400).send("Markdown content is empty.");
+      }
+
+      // 使用验证后的主题配置
+      let themeOptions = getDefaultTheme();
+
+      if (req.body.theme) {
+        try {
+          const customTheme = JSON.parse(req.body.theme);
+          // 验证并只应用允许的配置选项
+          themeOptions = validateTheme(customTheme);
+        } catch (e) {
+          console.error("Error parsing custom theme:", e);
+        }
+      }
+
+      const doc = await markdownDocx(markdown, {
+        theme: themeOptions,
+      });
+
+      // 先生成原始 DOCX buffer
+      let docxBuffer = await Packer.toBuffer(doc);
+
+      // 使用后处理函数应用表格样式
+      docxBuffer = await applyTableStyles(docxBuffer, themeOptions);
+
+      // 使用后处理函数应用全局字体和 Emoji 修复
+      docxBuffer = await applyGlobalFont(docxBuffer, themeOptions);
+
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      );
+      const encodedFilename = encodeURIComponent(filename);
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename*=UTF-8''${encodedFilename}`
+      );
+      res.send(docxBuffer); // Send buffer directly
+    } catch (error) {
+      console.error("Error converting to DOCX:", error);
+      res.status(500).send("Error converting file.");
     }
-
-    const doc = await markdownDocx(markdown, {
-      theme: themeOptions,
-    });
-
-    // 先生成原始 DOCX buffer
-    let docxBuffer = await Packer.toBuffer(doc);
-    
-    // 使用后处理函数应用表格样式
-    docxBuffer = await applyTableStyles(docxBuffer, themeOptions);
-
-    res.setHeader(
-      "Content-Type",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    );
-    const encodedFilename = encodeURIComponent(filename);
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename*=UTF-8''${encodedFilename}`
-    );
-    res.send(docxBuffer); // Send buffer directly
-  } catch (error) {
-    console.error("Error converting to DOCX:", error);
-    res.status(500).send("Error converting file.");
   }
-});
+);
 // --- End of refactored endpoint ---
 
 app.get("/api/files/:filename", (req, res) => {
