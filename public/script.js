@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .markdown-body h5 { color: var(--h5-color) !important; font-size: var(--h5-size) !important; }
         .markdown-body h6 { color: var(--h6-color) !important; font-size: var(--h6-size) !important; }
         .markdown-body a { color: var(--link-color) !important; text-decoration: var(--link-decoration) !important; }
-        .markdown-body pre code { color: var(--code-color) !important; font-size: var(--code-size) !important; }
+        .markdown-body pre code { color: var(--code-color) !important; font-size: var(--code-size) !important; background-color: transparent !important; }
         .markdown-body code { color: var(--codespan-color) !important; }
         .markdown-body pre { background-color: var(--code-bg) !important; border-color: var(--border-color) !important; }
         .markdown-body blockquote { color: var(--blockquote-color) !important; background-color: var(--blockquote-bg) !important; border-left-color: var(--blockquote-color) !important; }

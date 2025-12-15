@@ -217,9 +217,9 @@ function validateTheme(inputTheme) {
 // ======= 表格样式后处理函数 =======
 /**
  * 处理 DOCX 文件中的表格样式
- * 通过解压 DOCX，修改 document.xml 中的表格边框和表头背景，然后重新打包
+ * 修改 document.xml 中的表格边框和表头背景
  */
-async function applyTableStyles(docxBuffer, themeOptions) {
+async function applyTableStyles(zip, themeOptions) {
   // 提取所有表格相关配置
   const borderColor = themeOptions.border || "A5A5A5";
   const borderWidth = themeOptions.tableBorderWidth || 4;
@@ -235,9 +235,6 @@ async function applyTableStyles(docxBuffer, themeOptions) {
   const tableCenterAlign = themeOptions.tableCenterAlign !== false;
 
   try {
-    // 加载 DOCX (实际上是 ZIP 文件)
-    const zip = await JSZip.loadAsync(docxBuffer);
-
     // 读取 document.xml
     const documentXmlPath = "word/document.xml";
     let documentXml = await zip.file(documentXmlPath).async("string");
@@ -483,30 +480,18 @@ async function applyTableStyles(docxBuffer, themeOptions) {
 
     // 更新 ZIP 中的 document.xml
     zip.file(documentXmlPath, documentXml);
-
-    // 重新生成 DOCX buffer
-    const newBuffer = await zip.generateAsync({
-      type: "nodebuffer",
-      compression: "DEFLATE",
-      compressionOptions: { level: 9 },
-    });
-
-    return newBuffer;
   } catch (err) {
     console.error("Error applying table styles:", err);
-    // 如果处理失败，返回原始 buffer
-    return docxBuffer;
   }
 }
 
 /**
  * 修改全局字体，并强制 Emoji 字体显示
  */
-async function applyGlobalFont(docxBuffer, themeOptions) {
+async function applyGlobalFont(zip, themeOptions) {
   try {
-    const zip = await JSZip.loadAsync(docxBuffer);
     const stylesXmlPath = "word/styles.xml";
-    if (!zip.file(stylesXmlPath)) return docxBuffer;
+    if (!zip.file(stylesXmlPath)) return;
 
     let stylesXml = await zip.file(stylesXmlPath).async("string");
 
@@ -569,62 +554,122 @@ async function applyGlobalFont(docxBuffer, themeOptions) {
     const documentXmlPath = "word/document.xml";
     let documentXml = await zip.file(documentXmlPath).async("string");
 
-    // Emoji 专用字体设置：强制指定所有字体类型为 symbolFont
-    const emojiFontXml = `<w:rFonts w:ascii="${symbolFont}" w:eastAsia="${symbolFont}" w:hAnsi="${symbolFont}" w:cs="${symbolFont}" w:hint="default"/>`;
+    // Emoji 专用字体设置：强制指定所有字体类型为 symbolFont，且颜色自动
+    // 用于 Emoji 字符的 Run 属性
+    const emojiRPrContentFragment = `<w:rFonts w:ascii="${symbolFont}" w:eastAsia="${symbolFont}" w:hAnsi="${symbolFont}" w:cs="${symbolFont}" w:hint="default"/><w:color w:val="auto"/>`;
 
     // 匹配所有 <w:r> 元素
     documentXml = documentXml.replace(
       /<w:r>([\s\S]*?)<\/w:r>/gu,
       (runMatch, runContent) => {
-        // 使用 Unicode property escapes 检查 Run 是否包含 Emoji
-        if (/\p{Emoji}/u.test(runContent)) {
-          let hasEmojiInText = false;
-          // 进一步检查 <w:t> 内容
-          runContent.replace(
-            /<w:t[^>]*>([\s\S]*?)<\/w:t>/gu,
-            (textMatch, textContent) => {
-              if (/\p{Emoji}/u.test(textContent)) {
-                hasEmojiInText = true;
-              }
-              return textMatch;
-            }
-          );
+        // 1. 快速检查是否包含 Emoji，如果不包含则原样返回
+        if (!/\p{Emoji}/u.test(runContent)) {
+          return runMatch;
+        }
 
-          if (hasEmojiInText) {
-            if (runContent.includes("<w:rPr>")) {
-              return runMatch.replace(
-                /<w:rPr>([\s\S]*?)<\/w:rPr>/,
-                (rPrMatch, rPrContent) => {
-                  let newRPrContent = rPrContent.replace(
-                    /<w:rFonts[^>]*\/>/g,
-                    ""
-                  );
-                  return `<w:rPr>${emojiFontXml}${newRPrContent}</w:rPr>`;
-                }
-              );
+        // 2. 提取 rPr (Run Properties)，如果存在
+        let rPrMatch = runContent.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
+        let originalRPrTag = ""; // 完整的 <w:rPr>...</w:rPr>
+        let emojiRPrTag = ""; // 修改后的用于 Emoji 的 <w:rPr>...</w:rPr>
+
+        if (rPrMatch) {
+          originalRPrTag = rPrMatch[0];
+          // 构造 Emoji 专用的 rPr: 基于原有 rPr，但移除字体和颜色，添加 emojiRPrContentFragment
+          let rPrContent = rPrMatch[1];
+          let newRPrContent = rPrContent
+            .replace(/<w:rFonts[^>]*\/>/g, "")
+            .replace(/<w:color[^>]*\/>/g, "");
+          emojiRPrTag = `<w:rPr>${emojiRPrContentFragment}${newRPrContent}</w:rPr>`;
+        } else {
+          // 如果原 Run 没有属性，Emoji Run 使用基础属性
+          emojiRPrTag = `<w:rPr>${emojiRPrContentFragment}</w:rPr>`;
+        }
+
+        // 3. 移除原始 Run 中的 rPr，准备处理剩余内容
+        let contentWithoutRPr = runContent.replace(
+          /<w:rPr>[\s\S]*?<\/w:rPr>/,
+          ""
+        );
+
+        // 4. 遍历并拆分 <w:t> 标签
+        // 如果 Run 中包含非文本元素（如 <w:br/>），也需要保留
+        let newRuns = "";
+        let lastIndex = 0;
+        let tRegex = /<w:t([^>]*)>([\s\S]*?)<\/w:t>/g;
+        let match;
+        let hasProcessedT = false;
+
+        while ((match = tRegex.exec(contentWithoutRPr)) !== null) {
+          hasProcessedT = true;
+          // 处理 <w:t> 之前的非文本内容 (如 <w:br/>, <w:tab/>)
+          let preContent = contentWithoutRPr.substring(lastIndex, match.index);
+          if (preContent) {
+            newRuns += `<w:r>${originalRPrTag}${preContent}</w:r>`;
+          }
+
+          // 处理 <w:t> 内容：拆分 Emoji 和普通文本
+          let tAttrs = match[1];
+          let tContent = match[2];
+
+          // 使用正则拆分，保留分隔符(Emoji)
+          let segments = tContent.split(/(\p{Emoji}+)/u);
+
+          segments.forEach((segment) => {
+            if (!segment) return;
+
+            if (/\p{Emoji}/u.test(segment)) {
+              // Emoji 片段：使用 emojiRPrTag
+              // 确保 <w:t> 有 xml:space="preserve" 以防格式问题
+              let attrs = tAttrs;
+              if (!attrs.includes("xml:space")) {
+                attrs += ' xml:space="preserve"';
+              }
+              newRuns += `<w:r>${emojiRPrTag}<w:t${attrs}>${segment}</w:t></w:r>`;
             } else {
-              // 在 <w:t> 或其他子元素前插入 <w:rPr>
-              // 简单起见，插入在 <w:r> 标签之后的内容开头
-              return `<w:r><w:rPr>${emojiFontXml}</w:rPr>${runContent}</w:r>`;
+              // 普通文本片段：使用 originalRPrTag (保留原颜色)
+              let attrs = tAttrs;
+              if (!attrs.includes("xml:space")) {
+                attrs += ' xml:space="preserve"';
+              }
+              newRuns += `<w:r>${originalRPrTag}<w:t${attrs}>${segment}</w:t></w:r>`;
             }
+          });
+
+          lastIndex = tRegex.lastIndex;
+        }
+
+        // 处理最后一个 <w:t> 之后的剩余内容
+        let postContent = contentWithoutRPr.substring(lastIndex);
+        if (postContent) {
+          newRuns += `<w:r>${originalRPrTag}${postContent}</w:r>`;
+        }
+
+        // 如果没有找到 <w:t> 但有 Emoji (理论上很少见，除非 Emoji 在非 t 标签里?)
+        // 或者解析失败，回退到旧逻辑（防止内容丢失）
+        if (!hasProcessedT && contentWithoutRPr.trim().length > 0) {
+          // 简单回退：整个 Run 变色 (虽然不完美，但保证不丢内容)
+          if (originalRPrTag) {
+            return runMatch.replace(/<w:rPr>([\s\S]*?)<\/w:rPr>/, (m, c) => {
+              let newC = c
+                .replace(/<w:rFonts[^>]*\/>/g, "")
+                .replace(/<w:color[^>]*\/>/g, "");
+              return `<w:rPr>${emojiRPrContentFragment}${newC}</w:rPr>`;
+            });
+          } else {
+            return `<w:r><w:rPr>${emojiRPrContentFragment}</w:rPr>${runContent}</w:r>`;
           }
         }
-        return runMatch;
+
+        return newRuns || runMatch; // 如果为空（全空 Run），返回原样
       }
     );
 
     zip.file(documentXmlPath, documentXml);
-
-    return await zip.generateAsync({
-      type: "nodebuffer",
-      compression: "DEFLATE",
-      compressionOptions: { level: 9 },
-    });
   } catch (err) {
     console.error("Error applying global font:", err);
-    return docxBuffer;
   }
 }
+
 // ======= 辅助函数结束 =======
 
 // Define the highlight function with JSON pretty-printing
@@ -720,11 +765,26 @@ app.post(
       // 先生成原始 DOCX buffer
       let docxBuffer = await Packer.toBuffer(doc);
 
-      // 使用后处理函数应用表格样式
-      docxBuffer = await applyTableStyles(docxBuffer, themeOptions);
+      // 优化：只加载一次 ZIP
+      try {
+        const zip = await JSZip.loadAsync(docxBuffer);
 
-      // 使用后处理函数应用全局字体和 Emoji 修复
-      docxBuffer = await applyGlobalFont(docxBuffer, themeOptions);
+        // 使用后处理函数应用表格样式 (直接修改 zip 对象)
+        await applyTableStyles(zip, themeOptions);
+
+        // 使用后处理函数应用全局字体和 Emoji 修复 (直接修改 zip 对象)
+        await applyGlobalFont(zip, themeOptions);
+
+        // 生成最终的 DOCX buffer
+        docxBuffer = await zip.generateAsync({
+          type: "nodebuffer",
+          compression: "DEFLATE",
+          compressionOptions: { level: 9 },
+        });
+      } catch (err) {
+        console.error("Error processing DOCX zip:", err);
+        // 如果出错，docxBuffer 保持原始值，仍然尝试返回
+      }
 
       res.setHeader(
         "Content-Type",

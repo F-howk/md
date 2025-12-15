@@ -2,7 +2,7 @@
 
 This is a sample markdown file for the previewer.
 
-## Features
+## ✨ Features
 
 - Renders Markdown on the fly.
 - Lists all `.md` files in the directory.
