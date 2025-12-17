@@ -26,8 +26,18 @@ body {
   border-radius: 5px;
 }
 
+pre::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  height: 6px;
+  border-radius: 5px;
+}
+
+pre::-webkit-scrollbar {
+  height: 6px;
+}
+
 /* ==========================================================================
-   2. Layout Containers
+  2. Layout Containers
    ========================================================================== */
 .container {
   display: flex;
