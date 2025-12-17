@@ -22,6 +22,12 @@ const DOCX_THEME_CONFIG = {
     link: { label: "链接颜色", default: "0563C1", type: "color" },
     code: { label: "代码块文本颜色", default: "032F62", type: "color" },
     codespan: { label: "行内代码颜色", default: "70AD47", type: "color" },
+    // TODO: markdown-docx 没有提供行内代码背景色配置，暂时添加 后面手动处理
+    codespanBackground: {
+      label: "行内代码背景色",
+      default: "E8E8E8",
+      type: "color",
+    },
     codeBackground: { label: "代码背景颜色", default: "F6F6F7", type: "color" },
     blockquote: { label: "引用文本颜色", default: "666666", type: "color" },
     blockquoteBackground: {

@@ -13,11 +13,14 @@
     <div class="container">
         <div class="sidebar">
             <h1>Markdown Files</h1>
-            
+
             <label for="local-file-input" class="file-input-label">
                 <input type="file" id="local-file-input" accept=".md" multiple style="display: none;">
                 选择本地文件
             </label>
+            <div id="manual-input-btn" class="file-input-label">
+                手动输入
+            </div>
             <ul id="file-list"></ul>
         </div>
         <div class="main-area">
@@ -36,6 +39,7 @@
                 </div>
             </div>
             <div class="content-wrapper">
+                <textarea id="manual-editor" placeholder="# 在此输入 Markdown..." style="display: none;"></textarea>
                 <div class="markdown-body" id="content">
                     Select a file to preview...
                 </div>
