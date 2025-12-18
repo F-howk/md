@@ -1,0 +1,19 @@
+<svg width="256" height="256" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+  font-family="sans-serif">
+  <!-- Page Background -->
+  <rect id="logo-background" x="5" y="5" width="90" height="90" rx="5" ry="5" fill="#ffffff"
+    stroke="#999999" stroke-width="1" />
+  <!-- Left side: Code Symbols -->
+  <g fill="#4a4a4a" font-family="monospace" font-size="16" text-anchor="middle">
+    <text class="code-symbol" x="30" y="42">&lt;/&gt;</text>
+    <text class="code-symbol" x="30" y="68">{...}</text>
+  </g>
+  <!-- Right side: Rendered Text -->
+  <g fill="#2196F3">
+    <rect class="line-anim" x="55" y="25" width="30" height="5" rx="2" ry="2" />
+    <rect class="line-anim" x="55" y="40" width="35" height="3" rx="1.5" ry="1.5" />
+    <rect class="line-anim" x="55" y="50" width="32" height="3" rx="1.5" ry="1.5" />
+    <rect class="line-anim" x="55" y="60" width="36" height="3" rx="1.5" ry="1.5" />
+    <rect class="line-anim" x="55" y="70" width="28" height="3" rx="1.5" ry="1.5" />
+  </g>
+</svg>

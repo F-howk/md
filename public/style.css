@@ -73,14 +73,18 @@ pre::-webkit-scrollbar {
   border-right: 1px solid #ddd;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h1 {
-  font-size: 1.5em;
+  font-size: 0.75em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6c757d;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
   margin-top: 0;
-  color: #007bff;
-  margin-bottom: 20px;
 }
 
 /* File Input & Buttons in Sidebar */
@@ -144,6 +148,9 @@ pre::-webkit-scrollbar {
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #file-list li:hover {
@@ -749,4 +756,40 @@ code.hljs {
 .hljs-deletion {
   color: #ffdcd7;
   background-color: #67060c;
+}
+
+/* ==========================================================================
+   8. Custom Styles for Sidebar Brand
+   ========================================================================== */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f7fa;
+  padding: 15px 20px;
+  margin: -20px -20px 20px -20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-brand img {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-brand img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.sidebar-brand h2 {
+  font-size: 1.4em;
+  margin: 0;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.file-list-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }

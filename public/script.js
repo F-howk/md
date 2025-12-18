@@ -570,6 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.onload = (e) => {
           const item = createElement("li", "", {
             textContent: file.name,
+            title: file.name,
             "data-filename": file.name,
             "data-type": "local",
             onClick: () => {
@@ -600,6 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
       files.forEach((file) => {
         const item = createElement("li", "", {
           textContent: file,
+          title: file, // Added title attribute
           "data-filename": file,
           "data-type": "server",
           onClick: () => {
@@ -694,4 +696,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   loadDocxConfig();
+
+  const logoImg = document.getElementById("logoImg");
+  const styleElem = document.createElement("style");
+  styleElem.innerHTML = `
+    #logo-background {
+      stroke-dasharray: 360;
+      stroke-dashoffset: 360;
+      animation: draw-main 0.8s 0.1s ease-out forwards;
+    }
+
+    .code-symbol {
+      opacity: 0;
+      animation: fade-in 0.8s 0.1s ease-out forwards;
+    }
+
+    .line-anim {
+      transform: scaleX(0);
+      transform-origin: center;
+      animation: extend 0.8s ease-out forwards;
+    }
+
+    .line-anim:nth-child(1) { animation-delay: 0.1s; }
+    .line-anim:nth-child(2) { animation-delay: 0.1.5s; }
+    .line-anim:nth-child(3) { animation-delay: 0.2s; }
+    .line-anim:nth-child(4) { animation-delay: 0.2.5s; }
+    .line-anim:nth-child(5) { animation-delay: 0.3s; }
+
+    @keyframes draw-main { to { stroke-dashoffset: 0; } }
+    @keyframes fade-in { to { opacity: 1; } }
+    @keyframes extend { to { transform: scaleX(1); } }
+  `;
+
+  fetch("./icon.svg")
+    .then((res) => res.text())
+    .then((svgText) => {
+      const parser = new DOMParser();
+      const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+      const svgElem = svgDoc.documentElement;
+      svgElem.appendChild(styleElem);
+      const serializer = new XMLSerializer();
+      const modifiedSvgText = serializer.serializeToString(svgElem);
+      logoImg.src = URL.createObjectURL(
+        new Blob([modifiedSvgText], { type: "image/svg+xml" })
+      );
+    });
 });

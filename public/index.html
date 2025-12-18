@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Previewer</title>
+    <title>Markwright</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
 </head>
 
 <body>
     <div class="container">
         <div class="sidebar">
-            <h1>Markdown Files</h1>
+            <div class="sidebar-brand">
+                <img id="logoImg" src="/icon.svg" alt="Markwright Logo">
+                <h2>Markwright</h2>
+            </div>
 
             <label for="local-file-input" class="file-input-label">
                 <input type="file" id="local-file-input" accept=".md" multiple style="display: none;">
@@ -20,7 +24,9 @@
             <div id="manual-input-btn" class="file-input-label">
                 手动输入
             </div>
-            <ul id="file-list"></ul>
+            <div class="file-list-container">
+                <ul id="file-list"></ul>
+            </div>
         </div>
         <div class="main-area">
             <div class="ribbon-toolbar" id="style-settings">
